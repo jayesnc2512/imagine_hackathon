@@ -1,0 +1,6 @@
+[
+    {
+        "user": "hello doctor",
+        "assistant": "```json\n{\n  \"doctors_comment\": \"Hello! It's nice to meet you. How can I help you today?\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"prognosis\": null,\n  \"tests_required\": \"false\",\n  \"tests\": [],\n  \"possible_medications\": [],\n  \"questions\": [\n    \"Could you please describe your symptoms?\",\n    \"When did these symptoms start?\",\n    \"Have you experienced these symptoms before?\",\n    \"Are you currently taking any medications or supplements?\",\n    \"Do you have any known allergies?\",\n    \"Is there any family history of similar conditions?\"\n  ]\n}\n```"
+    }
+]

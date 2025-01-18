@@ -1,0 +1,26 @@
+[
+    {
+        "user": "good evening doctor",
+        "assistant": "```json\n{\n  \"doctors comment\": \"Good evening. It's nice to meet you for the first time. How can I help you today?\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": []\n}\n```"
+    },
+    {
+        "user": "I  vomitted multiple times in the morning",
+        "assistant": "```json\n{\n  \"doctors comment\": \"I understand you've been experiencing vomiting this morning. I'm sorry to hear that.  To help me understand the situation better, could you please tell me more?\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": [\n    \"Can you describe the vomit? Was it food, clear liquid, or something else? Was there any blood or unusual color?\",\n    \"How many times did you vomit this morning?\",\n    \"Do you have any other symptoms, such as diarrhea, fever, abdominal pain, or headache?\",\n    \"Have you eaten anything unusual recently?\",\n    \"Have you traveled anywhere recently?\",\n    \"Do you have any known medical conditions or allergies?\"\n  ]\n}\n```"
+    },
+    {
+        "user": "1. whatever i eat, comes out\n2. around 3-4 time\n3. abdominal pain\n4. noo\n5. not much recently. usual college going \n6.  not that i know of",
+        "assistant": "```json\n{\n  \"doctors comment\": \"Thank you for providing that information. It sounds like you're experiencing significant vomiting with abdominal pain.  This could be due to a number of causes, ranging from a simple stomach bug to something more serious.\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": [\n    \"Can you describe the abdominal pain? Is it sharp, dull, cramping, or burning? Where exactly is the pain located?\",\n    \"On a scale of 1 to 10, with 10 being the worst pain imaginable, how would you rate your abdominal pain?\",\n    \"Have you noticed any blood in your vomit or stool?\",\n    \"Have you been able to keep down any fluids at all?\",\n    \"When was the last time you urinated?\"\n\n  ]\n}\n```"
+    },
+    {
+        "user": "it is burning types\n6\nno blood\nno\nan hour or something back",
+        "assistant": "```json\n{\n  \"doctors comment\": \"Thank you for providing those additional details. The burning abdominal pain along with persistent vomiting is concerning. It suggests a possible issue with your gastrointestinal tract.  It's important to determine the underlying cause to ensure appropriate treatment.\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": [\n    \"Could you please clarify the location of the burning pain? Is it concentrated in a specific area of your abdomen, or is it more diffuse?\",\n    \"Have you experienced any heartburn or acid reflux recently?\",\n    \"Have you had any changes in your bowel habits, such as constipation or diarrhea?\",\n    \"Have you been feeling excessively thirsty or lightheaded?\",\n    \"Could you describe the color of your urine? Is it dark or concentrated?\"\n  ]\n}\n```"
+    },
+    {
+        "user": "please explain in simpler words",
+        "assistant": "```json\n{\n  \"doctors comment\": \"Okay, let's recap and simplify what we've discussed so far. You've been vomiting frequently today, around 3-4 times, and everything you eat comes back up. You also have abdominal pain that you describe as a burning sensation, rating it a 6 out of 10. You haven't noticed any blood in your vomit or stool, haven't been able to keep down any fluids, and last urinated about an hour ago.  The burning pain and persistent vomiting are key concerns, suggesting a potential problem in your digestive system. We need more information to pinpoint the exact cause.\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": [\n    \"Show me where the burning pain is in your stomach. Is it just in one spot, or all over?\",\n    \"Have you had any heartburn or indigestion lately?\",\n    \"Have you been constipated or had diarrhea?\",\n    \"Have you been very thirsty or felt dizzy?\",\n    \"What color is your pee? Is it dark?\"\n  ]\n}\n```"
+    },
+    {
+        "user": "one spot\nnothing\nnooo\nthirsty\ndark yellow",
+        "assistant": "```json\n{\n  \"doctors comment\": \"Thank you for clarifying. The localized burning pain, combined with the other symptoms you've described, raises the possibility of a few different conditions, including gastritis, a peptic ulcer, or even gallbladder issues.  Given the severity of your symptoms and the fact that you haven't been able to keep down any fluids, I recommend that you seek immediate medical attention.  Dehydration can become serious quickly, especially when combined with persistent vomiting.  An in-person examination and possibly some tests will be necessary to determine the exact cause of your symptoms and ensure you receive the appropriate treatment.\",\n  \"diagnosis_reached\": \"false\",\n  \"diagnosis\": null,\n  \"prognosis_reached\": \"false\",\n  \"questions\": []\n}\n```"
+    }
+]
