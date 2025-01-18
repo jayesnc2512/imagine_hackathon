@@ -17,6 +17,7 @@ import google.generativeai as genai
 from helpers import helpers
 from utils.eleven_labs import text_to_audio
 from utils.process_response import process_response
+from utils.lipSync import lip_sync_message
 
 import asyncio
 
@@ -164,9 +165,14 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
 
         os.remove(audio_file)  # Delete the file after reading
 
+        # lipsync= lip_sync_message("audio_sync")
+
+
+
         return {
             "text": text,
-            "audio": encoded_audio
+            "audio": encoded_audio,
+            # "lipsync":lipsync
         }
         
         # return {"result": response}
@@ -174,6 +180,7 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
         # return {"message": text, "session_id": session_id}
     
     except Exception as e:
+        print("errr",e)
         raise HTTPException(status_code=500, detail=str(e))
 @app.post("/api/describe_report")
 async def describe_report(file: UploadFile = File(...), session_id: str = Form(...)):
