@@ -35,7 +35,7 @@ class helpers():
     session_chains: Dict[str, RetrievalQA] = {}
     session_history: Dict[str, list] = {}  # Track the session history for each session
     history_directory = './session_history'  # Directory to store session histories
-    responseFormat="""{doctors comment: '',prognosis_reached:'true'/'false',prognosis:'if reached',tests_required:'true'/'false',tests:[],possible_medications:[],questions:''}"""
+    responseFormat="I want only plain text with punctuations nothing else"
 
       
 
@@ -128,7 +128,9 @@ class helpers():
         except Exception as e:
             print(f"Error in createChatSession: {e}")
             return None
-        
+                
+
+
     @staticmethod
     async def extract_pdf_pages_as_images(pdf_path, output_folder, dpi=96):
         try:
@@ -143,12 +145,13 @@ class helpers():
 
 
     @staticmethod
-    async def chat_with_rag(session_id: str, reqChat: str,qa_chain):
+    async def chat_with_rag(session_id: str, reqChat: str,language,qa_chain):
         try:
             history = helpers.session_history.get(session_id, [])
             previous_conversation = "\n".join([f"User: {item['user']}\nAssistant: {item['assistant']}" for item in history])
 
-            question = f"You're a doctor. Answer in a detailed. Structure of the answer should be json but text format such that it could parsed by JSON.parse(), bullet points if needed, the structure of respoonse should in the given format:{helpers.responseFormat}.if you are conclusive towards diagnosis ask questions. ask only necessary questions, frame the questions such that there is only 1 question per response. the subsequent chats will be added in the following prompts. following the diagnosis also give prognosis. do the conversation as you are the doctor. also consider the timeframe of the previous chats and their effect. I want the possible diagnosis after maximum 10 ma questions. if there is no prev chat do not mention directly that there is not prev chat, instead you can say something like as we have met for the first time and so.  . refer to the prev chat is required.Here is the prev conversation: {previous_conversation} . Here's the question: {reqChat}"
+
+            question = f"You're a doctor. Answer in a detailed. Structure of the answer should be plain text format,  bullet points if needed.if you are conclusive towards diagnosis ask questions. ask only necessary questions, frame the questions such that there is only 1 question per response. the subsequent chats will be added in the following prompts. following the diagnosis also give prognosis. do the conversation as you are the doctor. also consider the current timestamp of the previous chats and their effect. I want the possible diagnosis after maximum 10 questions. after 10 previous chats try to conclude and move ahead and prescribe some medicine whenever possible . if there is no prev chat do not mention directly that there is not prev chat, instead you can say something like as we have met for the first time and so. if age gender and name is required then only ask with the question.Strictly answer in {language}, keep the medicals terms in english only . refer to the prev chat is required.Here is the prev conversation: {previous_conversation} . Here's the question: {reqChat}"
             qa_chain = helpers.session_chains.get(session_id)
             
             if qa_chain:
