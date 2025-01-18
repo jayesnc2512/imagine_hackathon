@@ -1,4 +1,5 @@
 import json
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
@@ -21,13 +22,15 @@ from utils.lipSync import lip_sync_message
 import asyncio
 
 
-
 load_dotenv()
 
 # Access environment variable
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY2 = os.getenv("GOOGLE_API_KEY2")
 if not GOOGLE_API_KEY:
     raise RuntimeError("GOOGLE_API_KEY is not set in the .env file")
+if not GOOGLE_API_KEY2:
+    raise RuntimeError("GOOGLE_API_KEY2 is not set in the .env file")
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -39,6 +42,8 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
 )
+
+session_descriptions = {}
 
 
 # Define request body model
@@ -63,6 +68,9 @@ class SearchRequest(BaseModel):
     brand_name: str
     manufacturer_name: str
 
+class ReportDesc(BaseModel):
+    session_id: str
+   
 
 def read_cache(CACHE_FILE):
     if os.path.exists(CACHE_FILE):
@@ -94,8 +102,7 @@ async def create_session():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-
+      
 @app.post("/api/chat")
 async def chat_rag(chats_body: ChatsBody):
     try:
@@ -175,3 +182,19 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
     except Exception as e:
         print("errr",e)
         raise HTTPException(status_code=500, detail=str(e))
+@app.post("/api/describe_report")
+async def describe_report(file: UploadFile = File(...), session_id: str = Form(...)):
+    try:
+        pdf_path = f"uploads/{file.filename}"
+        with open(pdf_path, "wb") as pdf_file:
+            pdf_file.write(await file.read())
+
+        output_folder = "temp_images"
+        image_paths = await helpers.extract_pdf_pages_as_images(pdf_path, output_folder)
+        combined_description = await helpers.generate_combined_description(output_folder, GOOGLE_API_KEY, session_id)
+        
+        
+        return {"descriptions": combined_description}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"report problem: {e}")

@@ -10,8 +10,8 @@ from langchain.document_loaders import TextLoader
 from langchain.memory import ConversationBufferMemory
 from pathlib import Path
 import json
-
-
+from ironpdf import *
+import google.generativeai as genai
 import base64
 import mimetypes
 
@@ -20,6 +20,7 @@ from typing import Dict
 from dotenv import load_dotenv
 import os
 import textwrap
+import shutil
 
 # Load .env file
 load_dotenv()
@@ -122,6 +123,7 @@ class helpers():
                 
                 print("new session")
                 helpers.session_chains[session_id] = qa_chain
+                
             return helpers.session_chains[session_id]
         except Exception as e:
             print(f"Error in createChatSession: {e}")
@@ -129,6 +131,17 @@ class helpers():
         
 
 
+    @staticmethod
+    async def extract_pdf_pages_as_images(pdf_path, output_folder, dpi=96):
+        try:
+            pdf = PdfDocument.FromFile(pdf_path)
+            output_path = f"{output_folder}/*.png"
+            pdf.RasterizeToImageFiles(output_path, DPI=dpi)
+            print(f"PDF pages successfully extracted as images to {output_folder}.")
+            return output_folder
+        except Exception as e:
+            print(f"Error in pdf to image convresion: {e}")
+            return None
 
 
     @staticmethod
@@ -157,4 +170,68 @@ class helpers():
             print(f"Error in chat_with_rag: {e}")
             return None
         
-   
+    @staticmethod
+    def describeImage(image_path, api_key2):
+        try:
+            genai.configure(api_key=api_key2)
+            print(image_path)
+            prompt = (
+                "Summarize the report in image"
+            )
+
+            model = genai.GenerativeModel("gemini-1.5-flash")
+
+            # Read the image file
+            with open(image_path, "rb") as image_file:
+                image_content = image_file.read()
+
+            # Encode the image content to base64
+            encoded_image = base64.b64encode(image_content).decode('utf-8')
+
+            # Generate content using the model
+            response = model.generate_content([{'mime_type': 'image/jpeg', 'data': encoded_image}, prompt])
+            
+           
+            # Return the LLM's response
+            return response.text
+
+        except Exception as e:
+            print(f"Unexpected error in describeImage: {e}")
+            return None
+        
+    @staticmethod
+    async def generate_combined_description(output_folder: str, google_api_key: str, session_id):
+        try:
+            folder_path = os.path.abspath(output_folder)
+            if not os.path.exists(folder_path):
+                raise FileNotFoundError(f"Folder {output_folder} not found.")
+
+            image_files = [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+            if not image_files:
+                raise FileNotFoundError("No images found in the folder.")
+
+            combined_description = ""
+            descriptions = {}
+
+            for image_file in image_files:
+                image_path = os.path.join(folder_path, image_file)
+                description = helpers.describeImage(image_path, google_api_key)
+                descriptions[image_file] = description
+                combined_description += f"\n\nDescription for {image_file}:\n{description}"
+            
+           
+            if session_id in helpers.session_history:     
+                helpers.session_history[session_id].append({"user": "Medical report uploaded by user", "assistant": combined_description})
+            else:
+                # If session doesn't exist, initialize it
+                helpers.session_history[session_id] = [{"user": "Medical report uploaded by user", "assistant": combined_description}]
+            
+            helpers.saveSessionHistory(session_id)
+
+            if os.path.exists(folder_path):
+                shutil.rmtree(folder_path)
+
+            return combined_description
+        except Exception as e:
+            print(f"Error in generate_combined_description: {e}")
+            return str(e)
