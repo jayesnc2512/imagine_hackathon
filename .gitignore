@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/ar-frontend/node_modules
+
 /trial_frontend/node_modules
 /backend/venv
 /backend/__pycache__

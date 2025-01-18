@@ -1,0 +1,42 @@
+[
+    {
+        "user": "It's 21. How is it related?\n",
+        "assistant": "I'm not sure what you mean by \"It's 21.\"  Could you please clarify what you're referring to?"
+    },
+    {
+        "user": "You asked my age, no? So it's 21.\n",
+        "assistant": "You mentioned your age is 21.  How does this relate to your reason for visiting today?  What medical concerns do you have?"
+    },
+    {
+        "user": "I have cough cough severe cough.\n",
+        "assistant": "Okay, you've mentioned you're 21 and you have a severe cough.  How long have you been experiencing this cough?"
+    },
+    {
+        "user": "last two to three days it's mostly a little sore throat and a little cough\n",
+        "assistant": "You mentioned a severe cough and a slightly sore throat for the past two to three days.  Do you have any other symptoms, such as fever, body aches, or nasal congestion?"
+    },
+    {
+        "user": "No, no, no. None of that. \u0910\u0938\u093e \u0915\u0941\u091b \u0928\u0939\u0940\u0902\n",
+        "assistant": "You mentioned a severe cough, slightly sore throat for the past two to three days, and no fever, body aches, or nasal congestion.  Does the cough produce any phlegm or mucus, and if so, what color is it?"
+    },
+    {
+        "user": "no no it does not produce any impressive something uh and I don't know\n",
+        "assistant": "You mentioned a severe cough, slightly sore throat for two to three days, no fever, body aches, or nasal congestion, and no significant phlegm production.  Does the cough worsen at any particular time of day, such as morning or night?"
+    },
+    {
+        "user": "No no. It's anytime I feel coughing. It's not particular to day or night.\n",
+        "assistant": "You've mentioned a severe cough, slightly sore throat for two to three days, no fever, body aches, nasal congestion, or significant phlegm production, and the cough doesn't worsen at any particular time.  Do you have any known allergies, or have you been exposed to any irritants like dust, smoke, or chemicals recently?"
+    },
+    {
+        "user": "No no, I don't have any allergy or something. Nope.  You know that.\n",
+        "assistant": "You've mentioned a severe cough, slightly sore throat for two to three days, no fever, body aches, nasal congestion, significant phlegm production, worsening of cough at any particular time, and no known allergies or recent exposure to irritants.  Do you have any difficulty breathing or shortness of breath?"
+    },
+    {
+        "user": "No, no, no. I don't have any of that. Could you please tell me what I am facing?\n",
+        "assistant": "You've mentioned a severe cough, slightly sore throat for two to three days, no fever, body aches, nasal congestion, significant phlegm production, worsening of cough at any particular time, no known allergies or recent exposure to irritants, and no difficulty breathing or shortness of breath.  Do you have a history of asthma or other respiratory conditions?"
+    },
+    {
+        "user": "No, no est\u00e1.\nP\n",
+        "assistant": "You've mentioned a severe cough, slightly sore throat for two to three days, no fever, body aches, nasal congestion, significant phlegm production, worsening of cough at any particular time, no known allergies or recent exposure to irritants, and no difficulty breathing or shortness of breath.  Do you smoke or vape?"
+    }
+]
