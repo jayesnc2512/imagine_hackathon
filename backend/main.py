@@ -1,7 +1,9 @@
 import json
-from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
+from utils.audio_to_text import getTextFromAudio
+import base64
 
 
 from pydantic import BaseModel
@@ -12,6 +14,9 @@ from dotenv import load_dotenv
 import os
 import google.generativeai as genai
 from helpers import helpers
+from utils.eleven_labs import text_to_audio
+from utils.process_response import process_response
+
 import asyncio
 
 
@@ -106,12 +111,60 @@ async def chat_rag(chats_body: ChatsBody):
 
         # Create or retrieve the chat session
         qa_chain = await helpers.createChatSession(chats_body.session_id, vector_index, model)
-
+        language="marathi"
         # Perform the chat with the RAG model
-        result = await helpers.chat_with_rag(chats_body.session_id, chats_body.reqChat,qa_chain)
+        result = await helpers.chat_with_rag(chats_body.session_id, chats_body.reqChat,language,qa_chain)
 
         # Return the result
         return {"result": result}
 
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/api/audio_chat")
+async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...), language: str = Form(...)):
+    try:
+        # Ensure the 'temp_files' directory exists
+        os.makedirs('temp_files', exist_ok=True)
+
+        file_location = f"temp_files/{file.filename}"
+        with open(file_location, "wb") as buffer:
+            buffer.write(await file.read())  # Use 'await' for async file read
+
+        text = getTextFromAudio(file_location)
+        os.remove(file_location)
+
+        model = ChatGoogleGenerativeAI(
+            model="gemini-1.5-pro",
+            google_api_key=GOOGLE_API_KEY,
+            temperature=0.2,
+            convert_system_message_to_human=True
+        )
+
+        # Load the vector index and QA chain
+        vector_index = await helpers.loadVectorIndex()
+
+        # Create or retrieve the chat session
+        qa_chain = await helpers.createChatSession(session_id, vector_index, model)
+
+        # Perform the chat with the RAG model
+        response = await helpers.chat_with_rag(session_id, text,language,qa_chain)
+      
+        audio_file= text_to_audio(response)
+        with open(audio_file, "rb") as file:
+            audio_data = file.read()
+            encoded_audio = base64.b64encode(audio_data).decode('utf-8')
+
+        os.remove(audio_file)  # Delete the file after reading
+
+        return {
+            "text": text,
+            "audio": encoded_audio
+        }
+        
+        # return {"result": response}
+
+        # return {"message": text, "session_id": session_id}
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
