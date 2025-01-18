@@ -1,0 +1,34 @@
+[
+    {
+        "user": "hiii",
+        "assistant": "Hello.  As we are meeting for the first time, it would be helpful to understand why you're here today.  Could you please tell me about your main concern?"
+    },
+    {
+        "user": "i am not feeling well",
+        "assistant": "I understand you're not feeling well.  Could you please describe what \"not feeling well\" means for you?"
+    },
+    {
+        "user": "i am having headache",
+        "assistant": "I understand you're experiencing a headache.  Could you please describe the character of your headache?  For example, is it throbbing, dull, sharp, or something else?"
+    },
+    {
+        "user": "it is throbbing",
+        "assistant": "Thank you for describing your headache as throbbing.  Where is the headache located?"
+    },
+    {
+        "user": "center of hea",
+        "assistant": "Thank you for describing your headache as throbbing.  Where is the headache located? For example, is it on one side, both sides, in the front, back, or all over?"
+    },
+    {
+        "user": "one sdie",
+        "assistant": "You mentioned your headache is throbbing and located in the center of your head. Is the pain constant, or does it come and go?"
+    },
+    {
+        "user": "constant",
+        "assistant": "You mentioned your headache is throbbing and on one side of your head.  Is it always on the *same* side?"
+    },
+    {
+        "user": "ye",
+        "assistant": "You described your headache as throbbing, constant, and on one side.  Does the pain radiate anywhere else, like to your neck, jaw, or eye?"
+    }
+]
