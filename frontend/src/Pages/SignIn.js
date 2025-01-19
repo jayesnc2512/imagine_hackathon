@@ -80,9 +80,9 @@ const SignIn = ({setIsSignInVisible}) => {
     // <div style={styles.container}>
       <div style={styles.box}>
         <div>
-          <h3>
-            Health <span style={styles.navbarSign}>+</span>
-          </h3>
+      <h1 className="navbar-title">
+          Heal.<span className="navbar-sign">AR</span>
+      </h1>
         </div>
         <h2 style={styles.heading}>Welcome!</h2>
         <p style={styles.subHeading}>Sign in with Google to continue.</p>

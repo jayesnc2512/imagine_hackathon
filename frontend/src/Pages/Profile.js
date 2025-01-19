@@ -3,12 +3,13 @@ import "../Styles/Profile.css";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
+
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     name: "John Doe",
     photo:
-      "https://wallpapers.com/images/high/pfp-pictures-cqjs3osvdljthh53.webp", // Placeholder profile photo
+    "https://static.vecteezy.com/system/resources/previews/021/548/095/non_2x/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg",
     bloodGroup: "A+",
     diabetes: "No",
     gender: "Male",
@@ -204,7 +205,7 @@ function Profile() {
           </form>
         )}
       </div>
-      <Footer />
+      
     </div>
   );
 }

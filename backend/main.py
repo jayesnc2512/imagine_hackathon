@@ -108,7 +108,7 @@ async def chat_rag(chats_body: ChatsBody):
     try:
         # Initialize the model
         model = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
+            model="gemini-1.5-pro",
             google_api_key=GOOGLE_API_KEY,
             temperature=0.2,
             convert_system_message_to_human=True
@@ -119,7 +119,7 @@ async def chat_rag(chats_body: ChatsBody):
 
         # Create or retrieve the chat session
         qa_chain = await helpers.createChatSession(chats_body.session_id, vector_index, model)
-        language="english"
+        language="marathi"
         # Perform the chat with the RAG model
         result = await helpers.chat_with_rag(chats_body.session_id, chats_body.reqChat,language,qa_chain)
 
@@ -143,8 +143,8 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
         os.remove(file_location)
 
         model = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro",
-            google_api_key=GOOGLE_API_KEY,
+            model="gemini-1.5-flash",
+            google_api_key=GOOGLE_API_KEY2,
             temperature=0.2,
             convert_system_message_to_human=True
         )
@@ -167,13 +167,18 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
 
         # lipsync= lip_sync_message("audio_sync")
 
-        with open('audios/message_0.json', 'r') as file:
-            lipsync = json.load(file)
+        message_chunks = [response[i:i+70] for i in range(0, len(response), 70)]
+
+        for chunk in message_chunks:
+            with open('audios/message_0.json', 'r') as file:
+                lipsync = json.load(file)
+        
 
         print("res",response)
 
         return {
-            "text": text,
+            "userQuery":text,
+            "text": response,
             "audio": encoded_audio,
             "lipsync":lipsync
         }
@@ -185,6 +190,7 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
     except Exception as e:
         print("errr",e)
         raise HTTPException(status_code=500, detail=str(e))
+    
 @app.post("/api/describe_report")
 async def describe_report(file: UploadFile = File(...), session_id: str = Form(...)):
     try:
