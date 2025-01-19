@@ -5,7 +5,6 @@ import { faMicrophone, faMicrophoneSlash,faStop } from '@fortawesome/free-solid-
 
 
 
-
 export const UI = ({ hidden, ...props }) => {
   const { chat, loading, cameraZoomed, setCameraZoomed } = useChat();
   const [recording, setRecording] = useState(false);
@@ -14,6 +13,43 @@ export const UI = ({ hidden, ...props }) => {
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
   const audioRef = useRef();
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type === "application/pdf") {
+      setSelectedFile(file);
+      console.log("File selected:", file.name);
+    } else {
+      alert("Please upload a valid PDF file.");
+    }
+  };
+
+  const handleUploadClick = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      try {
+        const response = await fetch("https://your-server-endpoint.com/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("File uploaded successfully:", result);
+          alert(`File "${selectedFile.name}" uploaded successfully!`);
+        } else {
+          console.error("Failed to upload file:", response.statusText);
+          alert("Failed to upload file. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error during file upload:", error);
+        alert("An error occurred while uploading the file.");
+      }
+    }
+  };
 
   const startRecording = async () => {
     setRecording(true);
@@ -76,6 +112,28 @@ export const UI = ({ hidden, ...props }) => {
           Send
         </button> */}
       </div>
+      {/* <div className="fixed bottom-4 right-4 pointer-events-auto">
+        <button
+          onClick={() => alert("Button Clicked!")}
+          className="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg"
+        >
+          Action
+        </button>
+      </div> */}
+        <div className="fixed bottom-4 right-4 pointer-events-auto">
+    <label
+      htmlFor="file-upload"
+      className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg cursor-pointer flex items-center justify-center"
+    >
+      Upload File
+    </label>
+    <input
+      id="file-upload"
+      type="file"
+      onChange={handleUploadClick()}
+      className="hidden"
+    />
+  </div>
     </div>
   );
 };

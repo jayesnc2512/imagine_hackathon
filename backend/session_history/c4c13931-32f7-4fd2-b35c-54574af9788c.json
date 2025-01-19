@@ -1,0 +1,50 @@
+[
+    {
+        "user": "hello",
+        "assistant": "Hello.  What brings you in today?"
+    },
+    {
+        "user": "i am having stomach ache",
+        "assistant": "What is the nature of your stomach ache? (e.g., sharp, cramping, dull, burning)"
+    },
+    {
+        "user": "sharp",
+        "assistant": "Is the pain localized or diffuse?"
+    },
+    {
+        "user": "localised",
+        "assistant": "Is the pain constant or intermittent?"
+    },
+    {
+        "user": "constant",
+        "assistant": "Where exactly is the pain localized?"
+    },
+    {
+        "user": "left side of stomach",
+        "assistant": "Possible diagnoses include:\n\n* Gastritis\n* Peptic ulcer\n* Pancreatitis\n\nTo help narrow this down,  I need to know your age and gender."
+    },
+    {
+        "user": "i am 21 yo female",
+        "assistant": "Okay.  To further assess your pain,  does the pain radiate anywhere else?"
+    },
+    {
+        "user": "no",
+        "assistant": "Does the pain worsen with eating or after eating?"
+    },
+    {
+        "user": "after eating",
+        "assistant": "Does the pain improve after vomiting?"
+    },
+    {
+        "user": "no",
+        "assistant": "Given the constant, sharp, localized left-sided stomach pain worsening after eating, and not improving after vomiting,  the most likely diagnoses are gastritis or a peptic ulcer.  Pancreatitis is less likely given the location and lack of radiation.\n\nTo confirm, I need to know if you have any nausea or vomiting besides what you've already described."
+    },
+    {
+        "user": "no",
+        "assistant": "Do you have any heartburn or acid reflux?"
+    },
+    {
+        "user": "no",
+        "assistant": "Given your symptoms of constant, sharp, localized left-sided stomach pain worsening after eating,  absence of radiation, vomiting, or relief after vomiting, and no heartburn or acid reflux, the most likely diagnosis is a peptic ulcer. Gastritis remains a possibility, but is less likely given the severity and location of the pain.\n\nPrognosis:  With appropriate treatment, the prognosis for a peptic ulcer is generally good.  However, untreated ulcers can lead to complications.\n\nI will prescribe a proton pump inhibitor (PPI) such as Omeprazole to reduce stomach acid production.  You should follow up with me in a week to assess your progress.  It's crucial to avoid foods that trigger your pain.  A follow-up endoscopy may be necessary to confirm the diagnosis and rule out other conditions."
+    }
+]

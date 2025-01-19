@@ -4,7 +4,7 @@ from fastapi import FastAPI, Form, UploadFile, File
 from fastapi.responses import JSONResponse
 
 # Configure the API key
-genai.configure(api_key="AIzaSyAVjhxdO5GHq38Q15iW0THCqaOe03SINC8")
+genai.configure(api_key="AIzaSyCHj4zuXnrfn5ZarFRqF_7YICrVoHWWaXI")
 
 # Upload function to send file to Gemini
 def upload_to_gemini(path, mime_type=None):

@@ -1,0 +1,26 @@
+[
+    {
+        "user": "hii",
+        "assistant": "Hello.  As we're just meeting, could you please describe your symptoms?"
+    },
+    {
+        "user": "i am feelinf nauseus",
+        "assistant": "Okay.  How long have you been feeling nauseous?"
+    },
+    {
+        "user": "since morning",
+        "assistant": "Since when have you been feeling nauseous?"
+    },
+    {
+        "user": "since morning",
+        "assistant": "Is the nausea constant, or does it come and go?"
+    },
+    {
+        "user": "come and go",
+        "assistant": "Does the nausea worsen with movement or certain positions?"
+    },
+    {
+        "user": "yes",
+        "assistant": "Do you have any other symptoms, such as vomiting, diarrhea, fever, or abdominal pain?"
+    }
+]

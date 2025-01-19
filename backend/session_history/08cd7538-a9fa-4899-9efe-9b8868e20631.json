@@ -1,0 +1,18 @@
+[
+    {
+        "user": "i am having fever since a week",
+        "assistant": "How high is your fever typically running?"
+    },
+    {
+        "user": "102 degre",
+        "assistant": "Okay, 102 degrees Fahrenheit is quite high.  Could you describe any other symptoms you're experiencing along with the fever?"
+    },
+    {
+        "user": "i have weaknesss",
+        "assistant": "I understand you're experiencing weakness along with a week-long fever of 102\u00b0F.  Do you have any body aches or pain in any specific location?"
+    },
+    {
+        "user": "legs and shoulders",
+        "assistant": "Do you have any chills or sweating associated with the fever?"
+    }
+]

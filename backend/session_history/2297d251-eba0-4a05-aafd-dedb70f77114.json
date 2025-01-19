@@ -1,0 +1,22 @@
+[
+    {
+        "user": "Hii",
+        "assistant": "Hello.  What brings you in today?"
+    },
+    {
+        "user": "i have runny nose and sore throat",
+        "assistant": "Hello.  Runny nose and sore throat are common symptoms.  Do you have a cough?"
+    },
+    {
+        "user": "yes",
+        "assistant": "Do you have a fever?"
+    },
+    {
+        "user": "no",
+        "assistant": "Do you have any nasal congestion?"
+    },
+    {
+        "user": "yes",
+        "assistant": "Given your runny nose, sore throat, cough, and nasal congestion, the most likely diagnosis is a common cold (viral upper respiratory infection).\n\nPrognosis:  Most common colds resolve within 7-10 days with supportive care."
+    }
+]

@@ -108,7 +108,7 @@ async def chat_rag(chats_body: ChatsBody):
     try:
         # Initialize the model
         model = ChatGoogleGenerativeAI(
-            model="gemini-1.5-pro",
+            model="gemini-1.5-flash",
             google_api_key=GOOGLE_API_KEY,
             temperature=0.2,
             convert_system_message_to_human=True
@@ -119,7 +119,7 @@ async def chat_rag(chats_body: ChatsBody):
 
         # Create or retrieve the chat session
         qa_chain = await helpers.createChatSession(chats_body.session_id, vector_index, model)
-        language="marathi"
+        language="english"
         # Perform the chat with the RAG model
         result = await helpers.chat_with_rag(chats_body.session_id, chats_body.reqChat,language,qa_chain)
 

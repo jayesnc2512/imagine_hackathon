@@ -1,0 +1,14 @@
+[
+    {
+        "user": "i am having fever",
+        "assistant": "Since we're meeting for the first time, could you please tell me your age?"
+    },
+    {
+        "user": "22",
+        "assistant": "Okay, thanks for sharing your age.  And what is your gender?"
+    },
+    {
+        "user": "Female",
+        "assistant": "Alright, thank you for providing your age and gender.  How long have you been experiencing this fever?"
+    }
+]
