@@ -36,7 +36,7 @@ function Navbar() {
       </h1>
 
       {/* Desktop */}
-      {/* <ul className="navbar-items">
+      <ul className="navbar-items">
         <li>
           <Link to="/" className="navbar-links">
             Home
@@ -44,9 +44,9 @@ function Navbar() {
         </li>
         
         <li>
-          <a href="/report" className="navbar-links">
+          <Link to="/legal" className="navbar-links">
             Report Analysis
-          </a>
+          </Link>
         </li>
         <li>
           <a href="/nutri" className="navbar-links">
@@ -58,7 +58,7 @@ function Navbar() {
             Profile
           </Link>
         </li>
-      </ul> */}
+      </ul>
 
       {/* <button
         className="navbar-btn"
