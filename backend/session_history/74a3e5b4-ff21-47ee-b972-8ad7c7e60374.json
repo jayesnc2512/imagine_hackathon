@@ -1,0 +1,50 @@
+[
+    {
+        "user": "hii",
+        "assistant": "Hello.  What brings you in today?"
+    },
+    {
+        "user": "i have bad cramps",
+        "assistant": "Do you have any other symptoms besides bad cramps?"
+    },
+    {
+        "user": "no",
+        "assistant": "Do you experience these cramps during your menstrual cycle?"
+    },
+    {
+        "user": "yess",
+        "assistant": "Dysmenorrhea (menstrual cramps).\n\nPrognosis:  Generally self-limiting, manageable with over-the-counter analgesics.  If severe, further investigation may be needed."
+    },
+    {
+        "user": "they are severe",
+        "assistant": "How long have you been experiencing these severe menstrual cramps?"
+    },
+    {
+        "user": "everytime during periods",
+        "assistant": "How old are you?"
+    },
+    {
+        "user": "22",
+        "assistant": "Okay.  On a scale of 1-10, with 10 being the worst pain imaginable, how would you rate the severity of your cramps?"
+    },
+    {
+        "user": "9",
+        "assistant": "Given the severity (9/10) and consistent occurrence of your menstrual cramps since the onset of menstruation,  we need to consider secondary dysmenorrhea.\n\n*   **Possible Diagnoses:**  Endometriosis, Adenomyosis, Uterine fibroids.\n\nTo help determine the cause, I need to ask:  Have you experienced any heavy bleeding or prolonged periods?"
+    },
+    {
+        "user": "yes heavy bleedin",
+        "assistant": "Yes, heavy bleeding along with severe, consistent dysmenorrhea points towards the possibility of endometriosis, adenomyosis, or uterine fibroids.  To further refine the diagnosis, I need to ask:  Have you experienced pain during intercourse?"
+    },
+    {
+        "user": "no",
+        "assistant": "Have you experienced pain during bowel movements or urination?"
+    },
+    {
+        "user": "no",
+        "assistant": "The absence of pain during intercourse, bowel movements, or urination makes uterine fibroids less likely.  However, endometriosis and adenomyosis remain possibilities.\n\n* **Possible Diagnoses:** Endometriosis, Adenomyosis.\n\nTo help differentiate, I need to ask:  Do you experience pain in your lower back or pelvis outside of your menstrual cycle?"
+    },
+    {
+        "user": "no",
+        "assistant": "The absence of pain outside of menstruation makes adenomyosis less likely.  Endometriosis remains a strong possibility.\n\n* **Possible Diagnosis:** Endometriosis\n\n**Prognosis:**  Variable, depending on the extent of the endometriosis.  Treatment options include pain management (NSAIDs, hormonal birth control), and potentially surgery in severe cases.\n\n**Prescription:**  I recommend starting with over-the-counter ibuprofen (e.g., Advil, Motrin) 400-600mg every 4-6 hours as needed for pain.  If this is insufficient, we can discuss hormonal birth control options.  A pelvic ultrasound is recommended to confirm the diagnosis.  Follow up appointment needed to discuss results and further management."
+    }
+]
