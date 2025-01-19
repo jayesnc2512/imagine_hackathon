@@ -1,18 +1,13 @@
 import { useRef, useState } from "react";
 import { useChat } from "../hooks/useChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faMicrophoneSlash,faStop } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faMicrophone, faMicrophoneSlash, faStop } from '@fortawesome/free-solid-svg-icons';
 
 export const UI = ({ hidden, ...props }) => {
-  const { chat, loading, cameraZoomed, setCameraZoomed } = useChat();
+  const { chat, message, onMessagePlayed, loading, cameraZoomed, setCameraZoomed } = useChat();
   const [recording, setRecording] = useState(false);
-  const [audioFile, setAudioFile] = useState(null);
-  const [audioChunks, setAudioChunks] = useState([]);
   const [mediaRecorder, setMediaRecorder] = useState(null);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const audioRef = useRef();
+  const [audioURL, setAudioURL] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -55,7 +50,6 @@ export const UI = ({ hidden, ...props }) => {
     setRecording(true);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const recorder = new MediaRecorder(stream);
-
     const chunks = [];
 
     recorder.ondataavailable = (event) => {
@@ -83,6 +77,7 @@ export const UI = ({ hidden, ...props }) => {
       setRecording(false);
     }
   };
+
   // const sendAudio = () => {
   //   if (audioFile) {
   //     chat(audioFile, "english"); // Assuming language is 'en' for English
@@ -92,17 +87,23 @@ export const UI = ({ hidden, ...props }) => {
   if (hidden) return null;
 
   return (
-    <div className="fixed bottom-5 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
+    <div className="fixed bottom-5 left-0 right-0 z-10 flex flex-col p-4 pointer-events-none">
       {/* Other UI elements */}
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
           onClick={recording ? stopRecording : startRecording}
           className="bg-transparent hover:bg-transparent text-white rounded-md px-10"
-          style={{ fontSize: "90px", color: "black",  "borderRadius": "150px", opacity: "75%" }}
+          style={{ fontSize: "90px", color: "black", borderRadius: "150px", opacity: "75%" }}
         >
           {/* "border": "solid 2px", */}
           <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={ recording? "red": "black" } />
         </button>
+        {message?.text && (
+          <div className="mt-4 text-center text-black">
+            <p>{message.text}</p>
+          </div>
+        )}
+
         {/* <button
           disabled={loading || !audioFile}
           onClick={sendAudio}
@@ -112,6 +113,7 @@ export const UI = ({ hidden, ...props }) => {
           Send
         </button> */}
       </div>
+      
       {/* <div className="fixed bottom-4 right-4 pointer-events-auto">
         <button
           onClick={() => alert("Button Clicked!")}
