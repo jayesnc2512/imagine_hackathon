@@ -45,7 +45,7 @@ function App() {
       
           <Route path="/" element={<Home setIsSignInVisible={setIsSignInVisible} />} />
               <Route path="/signin" element={<SignIn  setIsSignInVisible={setIsSignInVisible}/>} />
-              {/* <Route path="/legal" element={<Legal />} /> */}
+              <Route path="/legal" element={<Legal />} />
               {/* <Route path="/appointment" element={<Appointment />} /> */}
               <Route path="*" element={<NotFound />} />
               <Route path="/profile" element={<Profile />} />

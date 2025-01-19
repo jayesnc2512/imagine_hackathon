@@ -6,9 +6,13 @@
 /trial_frontend/node_modules
 /backend/venv
 /backend/__pycache__
+/backend/utils/__pycache__
+
 /.pnp
 .pnp.js
-
+/venv
+backend/session_history
+/audios/message_*
 # testing
 /coverage
 

@@ -1,19 +1,15 @@
 import { useRef, useState,useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faMicrophoneSlash, faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faMicrophone, faMicrophoneSlash,  faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
 
 export const UI = ({ hidden, ...props }) => {
   const { chat, loading, cameraZoomed, setCameraZoomed, descImage } = useChat();
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
-  const [language, setLanguage] = useState("english");
   const [mediaRecorder, setMediaRecorder] = useState(null);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const audioRef = useRef();
+  const [audioURL, setAudioURL] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -62,7 +58,6 @@ export const UI = ({ hidden, ...props }) => {
     setRecording(true);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const recorder = new MediaRecorder(stream);
-
     const chunks = [];
 
     recorder.ondataavailable = (event) => {
@@ -90,6 +85,7 @@ export const UI = ({ hidden, ...props }) => {
       setRecording(false);
     }
   };
+
   // const sendAudio = () => {
   //   if (audioFile) {
   //     chat(audioFile, "english"); // Assuming language is 'en' for English
@@ -110,6 +106,12 @@ export const UI = ({ hidden, ...props }) => {
           {/* "border": "solid 2px", */}
           <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={recording ? "red" : "black"} />
         </button>
+        {message?.text && (
+          <div className="mt-4 text-center text-black">
+            <p>{message.text}</p>
+          </div>
+        )}
+
         {/* <button
           disabled={loading || !audioFile}
           onClick={sendAudio}
@@ -119,6 +121,7 @@ export const UI = ({ hidden, ...props }) => {
           Send
         </button> */}
       </div>
+      
       {/* <div className="fixed bottom-4 right-4 pointer-events-auto">
         <button
           onClick={() => alert("Button Clicked!")}
