@@ -1,0 +1,6 @@
+[
+    {
+        "user": null,
+        "assistant": "Since this is our first time meeting, I'll need some information to understand your current health concerns.  Could you please tell me:\n\n1. What brings you in today?\n2. How old are you?\n3. What is your gender?\n4.  Where are you experiencing discomfort or symptoms?\n5.  When did the symptoms start?\n6.  Can you describe the symptoms in detail (e.g., type of pain, severity, frequency)?\n7.  Are there any other symptoms you've noticed?\n8.  Do you have any known allergies?\n9.  What medications are you currently taking, including over-the-counter medications, supplements, and herbal remedies?\n10. Do you have any significant past medical history?\n\n\nOnce I have this information, we can discuss potential diagnoses and next steps."
+    }
+]

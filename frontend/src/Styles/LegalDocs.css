@@ -1,0 +1,260 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures the body and html occupy the full height */
+  }
+  
+  .legal-section-title {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the container takes the full height of the viewport */
+  }
+  
+  .legal-text-content {
+    flex: 1; /* Pushes the footer to the bottom */
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .legal-siteTitle {
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .legal-siteSign {
+    color: #e74c3c;
+  }
+  
+  
+  .legal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #34495e;
+  }
+  
+  .legal-description {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  /* Upload Button Styles */
+  .upload-section {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-button:hover {
+    background-color: #2980b9;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  /* Report Table Styles */
+  .report-table {
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-table h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  td {
+    color: #34495e;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  ul li {
+    list-style-type: disc;
+    color: #7f8c8d;
+  }
+  
+  /* Footer */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .legal-section-title {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .legal-siteTitle {
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .legal-siteSign {
+    color: #e74c3c;
+  }
+  
+  .legal-text-content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .legal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #34495e;
+  }
+  
+  .legal-description {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  /* Upload Button Styles */
+  .upload-section {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-button:hover {
+    background-color: #2980b9;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  /* Report Table Styles */
+  .report-table {
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-table h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  td {
+    color: #34495e;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  ul li {
+    list-style-type: disc;
+    color: #7f8c8d;
+  }
+  
+  /* Footer */
+  .legal-footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+    

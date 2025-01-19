@@ -5,8 +5,8 @@ import uuid
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from utils.audio_to_text import getTextFromAudio
 import base64
-
-
+import aiofiles
+import json
 from pydantic import BaseModel
 import re
 
@@ -167,12 +167,15 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
 
         # lipsync= lip_sync_message("audio_sync")
 
+        with open('audios/message_0.json', 'r') as file:
+            lipsync = json.load(file)
 
+        print("res",response)
 
         return {
             "text": text,
             "audio": encoded_audio,
-            # "lipsync":lipsync
+            "lipsync":lipsync
         }
         
         # return {"result": response}
@@ -198,3 +201,8 @@ async def describe_report(file: UploadFile = File(...), session_id: str = Form(.
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"report problem: {e}")
+    
+# async def read_json(file):
+#     async with aiofiles.open(file,mode='r',encoding='utf8') as f:
+#         data=await f.read()
+#     return json.loads(data)
