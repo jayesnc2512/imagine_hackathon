@@ -124,8 +124,8 @@ class helpers():
 
             history = helpers.session_history[session_id]
             for item in history:
-                user_text = item['user'].encode('utf-8').decode('unicode_escape')
-                assistant_text = item['assistant'].encode('utf-8').decode('unicode_escape')
+                user_text = item['user']
+                assistant_text = item['assistant']
 
                 # Add User text
                 user_paragraph = Paragraph(f"<b>User:</b> {user_text}", styles['Normal'])

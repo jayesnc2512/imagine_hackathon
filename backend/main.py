@@ -167,7 +167,7 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
 
         # lipsync= lip_sync_message("audio_sync")
 
-        message_chunks = [response[i:i+50] for i in range(0, len(response), 50)]
+        message_chunks = [response[i:i+70] for i in range(0, len(response), 70)]
 
         for chunk in message_chunks:
             with open('audios/message_0.json', 'r') as file:
