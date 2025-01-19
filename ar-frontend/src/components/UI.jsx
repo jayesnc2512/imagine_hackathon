@@ -1,55 +1,62 @@
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faMicrophoneSlash,faStop } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faMicrophoneSlash, faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
 
 
 
 export const UI = ({ hidden, ...props }) => {
-  const { chat, loading, cameraZoomed, setCameraZoomed } = useChat();
+  const { chat, loading, cameraZoomed, setCameraZoomed, descImage } = useChat();
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
+  const [language, setLanguage] = useState("english");
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
   const audioRef = useRef();
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
+    // alert('hello world');
     const file = event.target.files[0];
     if (file && file.type === "application/pdf") {
       setSelectedFile(file);
       console.log("File selected:", file.name);
+      
     } else {
       alert("Please upload a valid PDF file.");
     }
   };
 
   const handleUploadClick = async () => {
-    if (selectedFile) {
+    // if (selectedFile) {
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      await formData.append("file", selectedFile);
 
       try {
-        const response = await fetch("https://your-server-endpoint.com/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          console.log("File uploaded successfully:", result);
-          alert(`File "${selectedFile.name}" uploaded successfully!`);
-        } else {
-          console.error("Failed to upload file:", response.statusText);
-          alert("Failed to upload file. Please try again.");
-        }
+        await descImage(formData);
       } catch (error) {
         console.error("Error during file upload:", error);
         alert("An error occurred while uploading the file.");
       }
-    }
+    // }
   };
+
+  useEffect(() => {
+    const handleUnload = (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const email = urlParams.get('email');
+      if (email) {
+        alert(`Email ID: ${email}`);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload);
+    };
+  }, []);
 
   const startRecording = async () => {
     setRecording(true);
@@ -65,7 +72,7 @@ export const UI = ({ hidden, ...props }) => {
     recorder.onstop = () => {
       const blob = new Blob(chunks, { type: "audio/webm" });
       // setAudioBlob(blob);
-      chat(blob, "english");
+      chat(blob, language);
       // setAudioFile(blob);
       const url = URL.createObjectURL(blob);
       setAudioURL(url);
@@ -92,16 +99,16 @@ export const UI = ({ hidden, ...props }) => {
   if (hidden) return null;
 
   return (
-    <div className="fixed bottom-5 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
+    <div className="fixed bottom-5 left-18 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
       {/* Other UI elements */}
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
           onClick={recording ? stopRecording : startRecording}
           className="bg-transparent hover:bg-transparent text-white rounded-md px-10"
-          style={{ fontSize: "90px", color: "black",  "borderRadius": "150px", opacity: "75%" }}
+          style={{ fontSize: "90px", color: "black", "borderRadius": "150px", opacity: "75%" }}
         >
           {/* "border": "solid 2px", */}
-          <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={ recording? "red": "black" } />
+          <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={recording ? "red" : "black"} />
         </button>
         {/* <button
           disabled={loading || !audioFile}
@@ -120,20 +127,40 @@ export const UI = ({ hidden, ...props }) => {
           Action
         </button>
       </div> */}
-        <div className="fixed bottom-4 right-4 pointer-events-auto">
-    <label
-      htmlFor="file-upload"
-      className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg cursor-pointer flex items-center justify-center"
-    >
-      Upload File
-    </label>
-    <input
-      id="file-upload"
-      type="file"
-      onChange={handleUploadClick()}
-      className="hidden"
-    />
-  </div>
+
+
+      <div className="fixed bottom-18 left-4 pointer-events-auto">
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-lg cursor-pointer flex items-center justify-center w-20 h-20" style={{fontSize:"25px"}}
+          onClick={handleUploadClick}
+        >
+          <FontAwesomeIcon icon={faUpload} size="lg" />
+        </button>
+      </div>
+      <div className="fixed bottom-20 left-4 pointer-events-auto">
+        <input
+          id="file-upload"
+          type="file"
+          onChange={handleFileChange}
+
+        />
+      </div>
+
+        
+      <div className="fixed top-8 left-4 pointer-events-auto">
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="bg-gray-200 p-2 rounded-md"
+        >
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+
+          {/* Add more languages as needed */}
+        </select>
+      </div>
+
+
     </div>
   );
 };

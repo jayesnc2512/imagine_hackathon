@@ -8,10 +8,16 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.messages import HumanMessage
 from langchain.document_loaders import TextLoader
 from langchain.memory import ConversationBufferMemory
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+
+
 from pathlib import Path
 import json
 from ironpdf import *
 import google.generativeai as genai
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 import base64
 import mimetypes
 
@@ -100,15 +106,45 @@ class helpers():
             print(f"Error loading session history for {session_id}: {e}")
 
 
+
     @staticmethod
     def saveSessionHistory(session_id: str):
         try:
+            # Save JSON file
             session_file = Path(helpers.history_directory) / f"{session_id}.json"
             with open(session_file, 'w') as f:
                 json.dump(helpers.session_history[session_id], f, indent=4)
-            print(f"Saved history for session {session_id}")
+            print(f"Saved history for session {session_id} as JSON.")
+
+            # Save PDF file with text wrapping
+            pdf_file = Path(helpers.history_directory) / f"{session_id}.pdf"
+            doc = SimpleDocTemplate(str(pdf_file), pagesize=letter)
+            styles = getSampleStyleSheet()
+            story = []
+
+            history = helpers.session_history[session_id]
+            for item in history:
+                user_text = item['user'].encode('utf-8').decode('unicode_escape')
+                assistant_text = item['assistant'].encode('utf-8').decode('unicode_escape')
+
+                # Add User text
+                user_paragraph = Paragraph(f"<b>User:</b> {user_text}", styles['Normal'])
+                story.append(user_paragraph)
+
+                # Add Assistant text
+                assistant_paragraph = Paragraph(f"<b>Assistant:</b> {assistant_text}", styles['Normal'])
+                story.append(assistant_paragraph)
+
+                # Add a spacer between each entry
+                story.append(Spacer(1, 12))
+
+            # Build the PDF
+            doc.build(story)
+            print(f"Saved history for session {session_id} as PDF.")
+
         except Exception as e:
             print(f"Error saving session history for {session_id}: {e}")
+
 
 
 
