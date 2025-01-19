@@ -19,24 +19,26 @@ export const ChatProvider = ({ children }) => {
       });
       const data = await response.json();
       setSessionId(data.session_id);
+      return data.session_id
     } catch (error) {
       console.error("Error creating session:", error);
     }
   };
 
   const uploadAudio = async (audioFile, language) => {
+    let sID
     if (!sessionId) {
-      await createSession();
+      sID=await createSession();
     }
 
-    console.log("audioFile", audioFile);
+    await console.log("audioFile", audioFile);
     setLoading(true);
     const file = new File([audioFile], "audio.m4a", { type: "audio/m4a" });
     console.log(file)
 
 
     const formData = new FormData();
-    formData.append("session_id", sessionId);
+    formData.append("session_id", sessionId || sID);
     formData.append("file", file);
     formData.append("language", language);
 
@@ -56,6 +58,41 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
+  const descImage = async (formData) => {
+    // let sID
+    // if (!sessionId) {
+    //   sID = await createSession();
+    // }
+
+    // await console.log("audioFile", audioFile);
+    // setLoading(true);
+    // const file = new File([audioFile], "audio.m4a", { type: "audio/m4a" });
+    // console.log(file)
+
+
+    // const formData = new FormData();
+    setLoading(true)
+    formData.append("session_id", sessionId );
+    // formData.append("file", file);
+    // formData.append("language", language);
+
+    try {
+      const response = await fetch(`${backendUrl}/api/describe_report`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      console.log("data-message", data.descriptions);
+
+      // setMessage(data);
+      // setMessages([data.text]);
+    } catch (error) {
+      console.error("Error uploading audio:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // useEffect(() => {
   //   if (messages.length > 0) {
   //     setMessage(messages[0]);
@@ -68,6 +105,7 @@ export const ChatProvider = ({ children }) => {
     <ChatContext.Provider
       value={{
         chat: uploadAudio,
+        descImage,
         message,
         onMessagePlayed: () => setMessages((msgs) => msgs.slice(1)),
         loading,

@@ -4,7 +4,7 @@ from fastapi import FastAPI, Form, UploadFile, File
 from fastapi.responses import JSONResponse
 
 # Configure the API key
-genai.configure(api_key="AIzaSyCHj4zuXnrfn5ZarFRqF_7YICrVoHWWaXI")
+genai.configure(api_key="AIzaSyABVDcbeM_xGdYhsJlHXGu6TBkNsAiudCs")
 
 # Upload function to send file to Gemini
 def upload_to_gemini(path, mime_type=None):
@@ -21,7 +21,7 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-pro",
+    model_name="gemini-1.5-flash",
     generation_config=generation_config,
 )
 
