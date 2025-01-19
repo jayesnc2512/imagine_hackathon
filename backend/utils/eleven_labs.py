@@ -1,6 +1,6 @@
 from elevenlabs import ElevenLabs
 
-client = ElevenLabs(api_key="sk_3356c5de02cee9df837af1c905293c0b11912aafae28a047")
+client = ElevenLabs(api_key="sk_63b9672cdc305ebf0c4d1a14eda098df879411eab67d665a")
 
 # Convert the text to speech
 def text_to_audio(text):
