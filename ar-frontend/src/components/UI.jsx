@@ -1,10 +1,13 @@
 import { useRef, useState,useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faMicrophoneSlash,  faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faMicrophoneSlash, faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
+
+
 
 export const UI = ({ hidden, ...props }) => {
-  const { chat, loading, cameraZoomed, setCameraZoomed, descImage } = useChat();
+  const { chat, loading, cameraZoomed, setCameraZoomed, descImage, message } = useChat();
+  const [language,setLanguage]=useState("english")
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
@@ -101,7 +104,7 @@ export const UI = ({ hidden, ...props }) => {
         <button
           onClick={recording ? stopRecording : startRecording}
           className="bg-transparent hover:bg-transparent text-white rounded-md px-10"
-          style={{ fontSize: "90px", color: "black", "borderRadius": "150px", opacity: "75%" }}
+          style={{ fontSize: "90px", color: "black",  "borderRadius": "150px", opacity: "75%" }}
         >
           {/* "border": "solid 2px", */}
           <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={recording ? "red" : "black"} />
