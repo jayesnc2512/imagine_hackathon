@@ -123,7 +123,8 @@ export function Avatar(props) {
     }
     // setAnimation(message.animation);
     // setFacialExpression(message.facialExpression);
-    // setLipsync(message.lipsync);
+    console.log(message.lipsync);
+    setLipsync(message.lipsync);
     const audio = new Audio("data:audio/mp3;base64," + message.audio);
     audio.play();
     setAudio(audio);
@@ -166,7 +167,7 @@ export function Avatar(props) {
             set({
               [target]: value,
             });
-          } catch (e) {}
+          } catch (e) { }
         }
       }
     });
@@ -257,7 +258,7 @@ export function Avatar(props) {
         }
         const value =
           nodes.EyeLeft.morphTargetInfluences[
-            nodes.EyeLeft.morphTargetDictionary[key]
+          nodes.EyeLeft.morphTargetDictionary[key]
           ];
         if (value > 0.01) {
           emotionValues[key] = value;

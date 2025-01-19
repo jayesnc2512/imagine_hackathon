@@ -28,7 +28,7 @@ export const ChatProvider = ({ children }) => {
     if (!sessionId) {
       await createSession();
     }
-    
+
     console.log("audioFile", audioFile);
     setLoading(true);
     const file = new File([audioFile], "audio.m4a", { type: "audio/m4a" });
@@ -46,7 +46,7 @@ export const ChatProvider = ({ children }) => {
         body: formData,
       });
       const data = await response.json();
-      console.log(data);
+      console.log("data-message", data);
       setMessage(data);
       setMessages([data.text]);
     } catch (error) {

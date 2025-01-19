@@ -1,5 +1,9 @@
 import { useRef, useState } from "react";
 import { useChat } from "../hooks/useChat";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMicrophone, faMicrophoneSlash,faStop } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 export const UI = ({ hidden, ...props }) => {
@@ -52,14 +56,16 @@ export const UI = ({ hidden, ...props }) => {
   if (hidden) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
+    <div className="fixed bottom-5 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
       {/* Other UI elements */}
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
           onClick={recording ? stopRecording : startRecording}
-          className="bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-md"
+          className="bg-transparent hover:bg-transparent text-white rounded-md px-10"
+          style={{ fontSize: "90px", color: "black",  "borderRadius": "150px", opacity: "75%" }}
         >
-          {recording ? "Stop" : "Start"} Recording
+          {/* "border": "solid 2px", */}
+          <FontAwesomeIcon icon={recording ? faStop : faMicrophone} color={ recording? "red": "black" } />
         </button>
         {/* <button
           disabled={loading || !audioFile}
