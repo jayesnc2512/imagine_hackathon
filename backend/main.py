@@ -18,6 +18,7 @@ from helpers import helpers
 from utils.eleven_labs import text_to_audio
 from utils.process_response import process_response
 from utils.lipSync import lip_sync_message
+from utils.emailer import sendEmail
 
 import asyncio
 
@@ -71,6 +72,9 @@ class SearchRequest(BaseModel):
 class ReportDesc(BaseModel):
     session_id: str
    
+class MailBody(BaseModel):
+    session_id:str
+    client_email:str
 
 def read_cache(CACHE_FILE):
     if os.path.exists(CACHE_FILE):
@@ -207,6 +211,21 @@ async def describe_report(file: UploadFile = File(...), session_id: str = Form(.
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"report problem: {e}")
+
+@app.post("/api/verify-mail")
+async def send_email(mail_body:MailBody):
+    try:
+        pdf_path = f"session_history/{mail_body.session_id}.pdf"
+        done= sendEmail(mail_body.client_email,pdf_path)
+        if done:
+            return {"data":done }
+        else:
+            raise HTTPException(status_code=500, detail=f"report problem: {e}")
+            
+    except Exception as e:
+        print(f"erre",e)
+        raise HTTPException(status_code=500, detail=f"report problem: {e}")
+
     
 # async def read_json(file):
 #     async with aiofiles.open(file,mode='r',encoding='utf8') as f:

@@ -1,12 +1,12 @@
 import { useRef, useState,useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faMicrophoneSlash, faStop, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faMicrophoneSlash, faStop, faUpload, faExclamationCircle, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 
 
 
 export const UI = ({ hidden, ...props }) => {
-  const { chat, loading, cameraZoomed, setCameraZoomed, descImage, message } = useChat();
+  const { chat, loading, cameraZoomed, setCameraZoomed, descImage, message,sendMail } = useChat();
   const [language,setLanguage]=useState("english")
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
@@ -27,6 +27,7 @@ export const UI = ({ hidden, ...props }) => {
     }
   };
 
+
   const handleUploadClick = async () => {
     // if (selectedFile) {
       const formData = new FormData();
@@ -41,21 +42,23 @@ export const UI = ({ hidden, ...props }) => {
     // }
   };
 
-  useEffect(() => {
-    const handleUnload = (event) => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const email = urlParams.get('email');
-      if (email) {
-        alert(`Email ID: ${email}`);
-      }
-    };
-
-    window.addEventListener('beforeunload', handleUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleUnload);
-    };
-  }, []);
+  const handlemailer = async () => {
+    // Get the URL parameters
+    const params = new URLSearchParams(window.location.search);
+  
+    // Retrieve a specific parameter (e.g., "id")
+    const paramValue =await params.get("id"); // Replace "id" with the desired parameter name
+    // Example logic using the parameter
+    let email_id=`${paramValue}@gmail.com`;
+    // alert(email_id)
+    if (paramValue) {
+      await sendMail(email_id);
+      alert(`Mail Sent for ID: ${email_id}`);
+    } else {
+      alert("No ID parameter found in URL. Mail Sent.");
+    }
+  };
+  
 
   const startRecording = async () => {
     setRecording(true);
@@ -133,11 +136,21 @@ export const UI = ({ hidden, ...props }) => {
           Action
         </button>
       </div> */}
+        <div className="fixed bottom-16 left-4 pointer-events-auto" style={{bottom:"200px"}}>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg cursor-pointer flex items-center justify-center w-20 h-20"
+            style={{ fontSize: "25px" }}
+            onClick={()=> handlemailer()}
+            title="Send for verification to Doctors" // Tooltip caption here
+          >
+            <FontAwesomeIcon icon={faUserDoctor} size="lg" />
+          </button>
 
+      </div>
 
       <div className="fixed bottom-18 left-4 pointer-events-auto">
         <button
-          className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-lg cursor-pointer flex items-center justify-center w-20 h-20" style={{fontSize:"25px"}}
+          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg cursor-pointer flex items-center justify-center w-20 h-20" style={{fontSize:"25px"}}
           onClick={handleUploadClick}
         >
           <FontAwesomeIcon icon={faUpload} size="lg" />

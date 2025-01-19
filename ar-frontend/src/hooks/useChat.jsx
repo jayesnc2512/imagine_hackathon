@@ -93,6 +93,32 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
+  const sendMail=async(email_id)=>{
+    try{
+    let reqBody= {
+      session_id:sessionId,
+      client_email:email_id
+    }
+    const response = await fetch(`${backendUrl}/api/verify-mail`, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id:sessionId,
+        client_email:email_id
+      }),
+    });
+    const data = await response.json();
+    console.log("data-message", data);
+
+    // setMessage(data);
+    // setMessages([data.text]);
+  } catch (error) {
+    console.error("Error uploading audio:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
   // useEffect(() => {
   //   if (messages.length > 0) {
   //     setMessage(messages[0]);
@@ -112,6 +138,7 @@ export const ChatProvider = ({ children }) => {
         cameraZoomed,
         setCameraZoomed,
         createSession,
+        sendMail
       }}
     >
       {children}
