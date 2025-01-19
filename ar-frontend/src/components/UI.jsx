@@ -98,7 +98,7 @@ export const UI = ({ hidden, ...props }) => {
   if (hidden) return null;
 
   return (
-    <div className="fixed bottom-5 left-18 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
+    <div className="fixed bottom-5 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
       {/* Other UI elements */}
       <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
         <button
