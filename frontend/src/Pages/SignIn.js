@@ -23,7 +23,7 @@ const SignIn = ({setIsSignInVisible}) => {
         let email = result.user.email
         console.log(email);
         setIsSignInVisible(false)
-        window.location.href = `http://localhost:5173/?${email.split("@")[0]}`; // Redirect to the external site
+        window.location.href = `http://localhost:5173/?id=${email.split("@")[0]}`; // Redirect to the external site
       })
       .catch((error) => {
         console.error("Sign-in error:", error);

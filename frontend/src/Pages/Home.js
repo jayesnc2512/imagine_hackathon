@@ -17,8 +17,8 @@ function Home({ setIsSignInVisible}) {
       {/* <About /> */}
       {/* <BookAppointment /> */}
       {/* <Reviews /> */}
-      {/* <Doctors />
-      <Footer /> */}
+       <Doctors />
+      {/* <Footer />  */}
     </div>
   );
 }

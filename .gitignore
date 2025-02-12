@@ -11,6 +11,7 @@
 /.pnp
 .pnp.js
 /venv
+backend/.env
 backend/session_history
 /audios/message_*
 # testing

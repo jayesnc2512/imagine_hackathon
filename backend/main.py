@@ -144,7 +144,6 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
             buffer.write(await file.read())  # Use 'await' for async file read
 
         text = getTextFromAudio(file_location)
-        os.remove(file_location)
 
         model = ChatGoogleGenerativeAI(
             model="gemini-1.5-flash",
@@ -155,6 +154,7 @@ async def upload_audio(session_id: str = Form(...), file: UploadFile = File(...)
 
         # Load the vector index and QA chain
         vector_index = await helpers.loadVectorIndex()
+        os.remove(file_location)
 
         # Create or retrieve the chat session
         qa_chain = await helpers.createChatSession(session_id, vector_index, model)
